@@ -6,7 +6,7 @@ public class StepCommonBehavior : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		transform.position = new Vector2(Random.Range (-1.88f, 1.88f), -2.84f);
+		transform.position = new Vector2(-2.78f + 0.376f * Random.Range (0,11), -2.84f);
 	}
 	
 	// Update is called once per frame

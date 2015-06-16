@@ -6,6 +6,7 @@ using System.Collections;
 public class GameController : MonoBehaviour {
 	public int stepNumber;
 	public int levelNumber;
+	public int Koban;
 
 	int[] levels = new int[100];
 	// Use this for initialization
@@ -28,8 +29,8 @@ public class GameController : MonoBehaviour {
 			stepNumber = 0;
 			GameObject.Find ("LevelIndicator").GetComponent<Text> ().text = (levelNumber + 1).ToString();
 		}
-		if (levelNumber == 100) {
-			// Load Game Success Scene
+		if (levelNumber == 50) {
+			gameObject.GetComponent<SceneControl>().LoadSuccessScene();
 		}
 	}
 
@@ -45,6 +46,11 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void OnGameFail(){
-		Application.LoadLevel ("Game");
+		gameObject.GetComponent<SceneControl> ().LoadFailScene ();
+	}
+
+	public void GetKoban(){
+		Koban += 10;
+		GameObject.Find ("KobanNumber").GetComponent<Text> ().text = Koban.ToString ();
 	}
 }

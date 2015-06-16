@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class BreakStepBehavior : MonoBehaviour {
+	public float breakTime;
 
 	// Use this for initialization
 	void Start () {
@@ -15,13 +16,14 @@ public class BreakStepBehavior : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D other){
 		if (other.gameObject.tag == "Player") {
-			GameObject.Find("Player").GetComponent<PlayerControl>().TouchHealStep();	
+			GameObject.Find("Player").GetComponent<PlayerControl>().TouchHealStep();
+			GameObject.Find("Scripts").GetComponent<GameController>().GetKoban();
+			StartCoroutine(DestroyAfterTime());
 		}
-		StartCoroutine(DestroyAfterTime());
 	}
 
 	IEnumerator DestroyAfterTime() {
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(breakTime);
 		Destroy (gameObject);
 	}
 }

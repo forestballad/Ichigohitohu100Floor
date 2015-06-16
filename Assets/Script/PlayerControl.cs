@@ -11,7 +11,7 @@ public class PlayerControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		updateHealthBar ();
 	}
 	
 	// Update is called once per frame
@@ -24,29 +24,34 @@ public class PlayerControl : MonoBehaviour {
 	}
 
 	public void TouchHealStep(){
-		playerHealth += 5;
+		playerHealth += 1;
 		if (playerHealth > playerHealthCap) {
 			playerHealth = playerHealthCap;
 		}
+		updateHealthBar();
 		GameObject.Find ("HealthIndicator").GetComponent<Text> ().text = playerHealth.ToString();
 	}
 
 	public void TouchTrapStep(){
-		playerHealth -= 14;
+		playerHealth -= 5;
+		updateHealthBar();
 		if (playerHealth <= 0) {
 			playerHealth = 1;
 			GameObject.Find ("HealthIndicator").GetComponent<Text> ().text = playerHealth.ToString();
 			GameObject.Find("Scripts").GetComponent<GameController>().OnGameFail();
+			updateHealthBar();
 		}
 		GameObject.Find ("HealthIndicator").GetComponent<Text> ().text = playerHealth.ToString();
 	}
 
 	public void TouchRoof(){
-		playerHealth -= 20;
+		playerHealth -= 16;
+		updateHealthBar();
 		if (playerHealth <= 0) {
 			playerHealth = 1;
 			GameObject.Find ("HealthIndicator").GetComponent<Text> ().text = playerHealth.ToString();
 			GameObject.Find("Scripts").GetComponent<GameController>().OnGameFail();
+			updateHealthBar();
 		}
 		GameObject.Find ("HealthIndicator").GetComponent<Text> ().text = playerHealth.ToString();
 	}
@@ -57,5 +62,16 @@ public class PlayerControl : MonoBehaviour {
 
 	public void TouchBounceStep(){
 		rgb2D.AddForce (new Vector2(0,bounceForce));
+	}
+
+	void updateHealthBar(){
+		GameObject.Find("HealthBar").GetComponent<RectTransform>().sizeDelta = new Vector2(playerHealth*3,20);
+		if (playerHealth > 35) {
+			GameObject.Find ("HealthBar").GetComponent<Image> ().color = Color.green;
+		} else if (playerHealth > 20) {
+			GameObject.Find ("HealthBar").GetComponent<Image> ().color = Color.yellow;
+		} else {
+			GameObject.Find ("HealthBar").GetComponent<Image> ().color = Color.red;
+		}
 	}
 }
