@@ -8,18 +8,27 @@ public class PlayerControl : MonoBehaviour {
 	public float playerHealthCap = 54;
 	public float bounceForce;
 	public Rigidbody2D rgb2D;
+	public Animator animator;
 
 	// Use this for initialization
 	void Start () {
 		updateHealthBar ();
+		animator.SetBool ("isAir", true);
+		animator.SetBool ("isIdle", true);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKey ("left")) {
 			transform.position = new Vector2 (transform.position.x - playerSpeed, transform.position.y);
+			animator.SetBool ("isFacingRight", false);
+			animator.SetBool ("isIdle",false);
 		} else if (Input.GetKey ("right")) {
 			transform.position = new Vector2 (transform.position.x + playerSpeed, transform.position.y);
+			animator.SetBool ("isFacingRight", true);
+			animator.SetBool ("isIdle",false);
+		} else {
+			animator.SetBool ("isIdle",true);
 		}
 	}
 
@@ -62,6 +71,18 @@ public class PlayerControl : MonoBehaviour {
 
 	public void TouchBounceStep(){
 		rgb2D.AddForce (new Vector2(0,bounceForce));
+	}
+
+	void OnCollisionEnter2D(Collision2D other){
+		if (other.gameObject.tag == "Step") {
+			animator.SetBool("isAir",false);
+		}
+	}
+
+	void OnCollisionExit2D(Collision2D other){
+		if (other.gameObject.tag == "Step") {
+			animator.SetBool("isAir",true);
+		}
 	}
 
 	void updateHealthBar(){
