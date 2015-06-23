@@ -7,16 +7,25 @@ public class GameController : MonoBehaviour {
 	public int stepNumber;
 	public int levelNumber;
 	public int Koban;
+	public GameObject regularStep;
+	public GameObject successObject;
 
 	int[] levels = new int[100];
+
+	void Awake(){
+		successObject.SetActive(false);
+	}
+
 	// Use this for initialization
 	void Start () {
 		GameObject.Find ("LevelIndicator").GetComponent<Text> ().text = "1";
 		stepNumber = 0;
 		levelNumber = 0;
 		InitializeLevel ();
+		GameObject firstStep = Instantiate (regularStep);
+		firstStep.GetComponent<StepCommonBehavior> ().SetStepPosition (new Vector2 (-0.9f,-0.2f));
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 	
@@ -29,8 +38,12 @@ public class GameController : MonoBehaviour {
 			stepNumber = 0;
 			GameObject.Find ("LevelIndicator").GetComponent<Text> ().text = (levelNumber + 1).ToString();
 		}
-		if (levelNumber == 50) {
-			gameObject.GetComponent<SceneControl>().LoadSuccessScene();
+		if (levelNumber == 4) {
+			GetComponent<GenerateSteps>().StopCreateSteps();
+			successObject.SetActive(true);
+		}
+		if (levelNumber > 4) {
+			levelNumber = 4;
 		}
 	}
 
@@ -52,5 +65,14 @@ public class GameController : MonoBehaviour {
 	public void GetKoban(){
 		Koban += 10;
 		GameObject.Find ("KobanNumber").GetComponent<Text> ().text = Koban.ToString ();
+	}
+
+	void DestroyAllSteps()
+	{
+		GameObject[] steps = GameObject.FindGameObjectsWithTag ("Step");
+		for(var i = 0 ; i < steps.Length ; i ++)
+		{
+			Destroy(steps[i]);
+		}
 	}
 }

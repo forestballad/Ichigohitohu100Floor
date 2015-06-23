@@ -1,17 +1,13 @@
 fileFormatVersion: 2
 guid: 7924d0b0e2b1ebb4b9d4012193391f99
-timeCreated: 1434814440
+timeCreated: 1435014178
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: "\u5DE6\u8DD1_0"
-    21300002: "\u5DE6\u8DD1_1"
-    21300004: "\u5DE6\u8DD1_2"
-    21300006: "\u5DE6\u8DD1_3"
-    21300008: L_Run_0
-    21300010: L_Run_1
-    21300012: L_Run_2
-    21300014: L_Run_3
+    21300000: L_Run_0
+    21300002: L_Run_1
+    21300004: L_Run_2
+    21300006: L_Run_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

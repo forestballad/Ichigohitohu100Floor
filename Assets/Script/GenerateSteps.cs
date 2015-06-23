@@ -24,4 +24,9 @@ public class GenerateSteps : MonoBehaviour {
 		}
 		Instantiate (steps[stepType]);
 	}
+
+	public void StopCreateSteps(){
+		CancelInvoke("createStep");
+
+	}
 }
