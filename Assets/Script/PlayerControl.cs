@@ -88,11 +88,11 @@ public class PlayerControl : MonoBehaviour {
 	void updateHealthBar(){
 		GameObject.Find("HealthBar").GetComponent<RectTransform>().sizeDelta = new Vector2(playerHealth*3,20);
 		if (playerHealth > 35) {
-			GameObject.Find ("HealthBar").GetComponent<Image> ().color = Color.green;
+			GameObject.Find ("HealthBar").GetComponent<Image> ().color = new Color(143/225f, 207/225f, 159/225f);
 		} else if (playerHealth > 20) {
-			GameObject.Find ("HealthBar").GetComponent<Image> ().color = Color.yellow;
+			GameObject.Find ("HealthBar").GetComponent<Image> ().color = new Color(253/225f, 212/225f, 111/225f);
 		} else {
-			GameObject.Find ("HealthBar").GetComponent<Image> ().color = Color.red;
+			GameObject.Find ("HealthBar").GetComponent<Image> ().color = new Color(238/225f, 127/225f, 113/225f);
 		}
 	}
 }

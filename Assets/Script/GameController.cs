@@ -4,6 +4,7 @@ using System.Collections;
 
 
 public class GameController : MonoBehaviour {
+	static int MAX_LEVEL = 49;
 	public int stepNumber;
 	public int levelNumber;
 	public int Koban;
@@ -23,7 +24,7 @@ public class GameController : MonoBehaviour {
 		levelNumber = 0;
 		InitializeLevel ();
 		GameObject firstStep = Instantiate (regularStep);
-		firstStep.GetComponent<StepCommonBehavior> ().SetStepPosition (new Vector2 (-0.9f,-0.2f));
+		firstStep.GetComponent<StepCommonBehavior> ().SetStepPosition (new Vector2 (-0.9f,-1.5f));
 	}
 
 	// Update is called once per frame
@@ -38,12 +39,12 @@ public class GameController : MonoBehaviour {
 			stepNumber = 0;
 			GameObject.Find ("LevelIndicator").GetComponent<Text> ().text = (levelNumber + 1).ToString();
 		}
-		if (levelNumber == 4) {
+		if (levelNumber == MAX_LEVEL) {
 			GetComponent<GenerateSteps>().StopCreateSteps();
 			successObject.SetActive(true);
 		}
-		if (levelNumber > 4) {
-			levelNumber = 4;
+		if (levelNumber > MAX_LEVEL) {
+			levelNumber = MAX_LEVEL;
 		}
 	}
 
@@ -64,7 +65,14 @@ public class GameController : MonoBehaviour {
 
 	public void GetKoban(){
 		Koban += 10;
-		GameObject.Find ("KobanNumber").GetComponent<Text> ().text = Koban.ToString ();
+		string kobanDisplay = Koban.ToString ();
+		if (Koban >= 10 && Koban < 100) {
+			kobanDisplay = "00" + kobanDisplay;
+		} 
+		else if (Koban >= 100 && Koban < 1000){
+			kobanDisplay = "0" + kobanDisplay;
+		}
+		GameObject.Find ("KobanNumber").GetComponent<Text> ().text = kobanDisplay;
 	}
 
 	void DestroyAllSteps()

@@ -5,7 +5,7 @@ public class HakateControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		transform.position = new Vector2 (Random.Range (-2.5f, 2.5f), transform.position.y);
+		transform.position = new Vector2 (Random.Range (-3f, 1f), transform.position.y);
 	}
 	
 	// Update is called once per frame
