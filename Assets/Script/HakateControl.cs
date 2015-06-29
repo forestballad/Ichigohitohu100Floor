@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class HakateControl : MonoBehaviour {
+	int RICH_END = 700;
 
 	// Use this for initialization
 	void Start () {
@@ -15,7 +16,12 @@ public class HakateControl : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.tag == "Player") {
-			Application.LoadLevel("GameSuccess");
+			if (GameObject.Find("Scripts").GetComponent<GameController>().Koban >= RICH_END){
+				Application.LoadLevel("GameRichSuccess");
+			}
+			else {
+				Application.LoadLevel("GameSuccess");
+			}
 		}
 	}
 }
