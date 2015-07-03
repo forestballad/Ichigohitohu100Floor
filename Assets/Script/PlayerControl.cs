@@ -9,6 +9,8 @@ public class PlayerControl : MonoBehaviour {
 	public float bounceForce;
 	public Rigidbody2D rgb2D;
 	public Animator animator;
+	public Color originalColor;
+	public Color flashColor;
 
 	// Use this for initialization
 	void Start () {
@@ -51,6 +53,13 @@ public class PlayerControl : MonoBehaviour {
 			updateHealthBar();
 		}
 		GameObject.Find ("HealthIndicator").GetComponent<Text> ().text = playerHealth.ToString();
+		StartCoroutine (flashOnHit());
+	}
+
+	IEnumerator flashOnHit() {
+		GetComponent<SpriteRenderer> ().color = flashColor;
+		yield return new WaitForSeconds(0.1f);
+		GetComponent<SpriteRenderer> ().color = originalColor;
 	}
 
 	public void TouchRoof(){
@@ -63,6 +72,7 @@ public class PlayerControl : MonoBehaviour {
 			updateHealthBar();
 		}
 		GameObject.Find ("HealthIndicator").GetComponent<Text> ().text = playerHealth.ToString();
+		StartCoroutine (flashOnHit());
 	}
 
 	public void MoveByStep(int moveDirection, float moveSpeed){
