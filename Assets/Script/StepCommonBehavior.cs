@@ -3,10 +3,11 @@ using System.Collections;
 
 public class StepCommonBehavior : MonoBehaviour {
 	public float movingSpeed;
+	float[] pos = new float[8] {-2.77f,-2.27f,-1.72f,-1.17f,-0.62f,-0.07f,0.48f,0.98f};
 
 	// Use this for initialization
 	void Awake () {
-		transform.position = new Vector2(-2.78f + 0.376f * Random.Range (0,11), -2.66f);
+		transform.position = new Vector2(pos[Random.Range (0,8)], -2.66f);
 	}
 
 	void Start(){
